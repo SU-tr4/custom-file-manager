@@ -1,0 +1,317 @@
+.cfm-wrap {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.cfm-file-panel {
+    width: 420px;
+    flex-shrink: 0;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.cfm-breadcrumb {
+    background: #f0f0f1;
+    padding: 6px 10px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    word-break: break-all;
+}
+.cfm-breadcrumb a {
+    text-decoration: none;
+}
+.cfm-toolbar {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.cfm-toolbar input[type="text"] {
+    flex-grow: 1;
+    padding: 3px 6px;
+}
+.cfm-tree-container {
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid #dcdcde;
+    background: #fafafa;
+}
+.cfm-tree-container.drag-over {
+    outline: 2px dashed #2271b1;
+    outline-offset: -2px;
+    background: #eef6ff;
+}
+.cfm-editor-area {
+    flex-grow: 1;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+    box-sizing: border-box;
+}
+.cfm-editor-area h3 {
+    margin: 0 0 10px;
+    word-break: break-all;
+}
+
+/* ファイル一覧 */
+.cfm-file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.cfm-file-list li {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: #1d2327;
+}
+.cfm-file-list li:hover {
+    background: #f0f6fc;
+}
+.cfm-file-list li.is-dir {
+    font-weight: bold;
+    color: #0073aa;
+}
+.cfm-file-list li.active {
+    background: #dbe8fb;
+}
+.cfm-file-list li.cfm-error {
+    color: #b32d2e;
+    cursor: default;
+    white-space: normal;
+}
+.cfm-item-name {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.cfm-file-list button.delete-btn {
+    background: #a00;
+    color: #fff;
+    border: none;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+.cfm-file-list button.delete-btn:hover {
+    background: #dc3232;
+}
+
+/* ============================================================
+ * エディタ（Monokai 配色：背景 #272822 / 文字 #f8f8f2）
+ * ========================================================== */
+.cfm-editor-container {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    border: 1px solid #1e1f1c;
+    background: #272822;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* CodeMirror が使えない場合のフォールバック textarea も読みやすく */
+.cfm-editor-container .cfm-fallback-textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    background: #272822;
+    color: #f8f8f2;
+    -webkit-text-fill-color: #f8f8f2;
+    opacity: 1;
+    caret-color: #f8f8f2;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre;
+    overflow: auto;
+    tab-size: 4;
+}
+.cfm-editor-container .cfm-fallback-textarea::placeholder {
+    color: #90908a;
+    -webkit-text-fill-color: #90908a;
+}
+
+.cfm-editor-container .CodeMirror {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #272822;
+    color: #f8f8f2;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.cfm-editor-container .CodeMirror-scroll {
+    background: #272822;
+}
+.cfm-editor-container .CodeMirror-gutters {
+    background: #272822;
+    border-right: 1px solid #3e3d32;
+}
+.cfm-editor-container .CodeMirror-linenumber {
+    color: #90908a;
+}
+.cfm-editor-container .CodeMirror-cursor {
+    border-left: 2px solid #f8f8f0;
+}
+.cfm-editor-container .CodeMirror-selected {
+    background: #49483e;
+}
+.cfm-editor-container .CodeMirror-focused .CodeMirror-selected {
+    background: #49483e;
+}
+.cfm-editor-container .CodeMirror-activeline-background {
+    background: #3e3d32;
+}
+.cfm-editor-container .CodeMirror-matchingbracket {
+    color: #f8f8f2 !important;
+    background: #49483e;
+    text-decoration: underline;
+}
+.cfm-editor-container .CodeMirror-nonmatchingbracket {
+    color: #f92672 !important;
+}
+.cfm-editor-container .CodeMirror pre.CodeMirror-line,
+.cfm-editor-container .CodeMirror pre.CodeMirror-line-like {
+    color: #f8f8f2;
+}
+
+/* シンタックスハイライトの色 */
+.cfm-editor-container .cm-s-monokai span.cm-comment    { color: #8f8f7a; font-style: italic; }
+.cfm-editor-container .cm-s-monokai span.cm-keyword    { color: #f92672; }
+.cfm-editor-container .cm-s-monokai span.cm-operator   { color: #f92672; }
+.cfm-editor-container .cm-s-monokai span.cm-string     { color: #e6db74; }
+.cfm-editor-container .cm-s-monokai span.cm-string-2   { color: #e6db74; }
+.cfm-editor-container .cm-s-monokai span.cm-number     { color: #ae81ff; }
+.cfm-editor-container .cm-s-monokai span.cm-atom       { color: #ae81ff; }
+.cfm-editor-container .cm-s-monokai span.cm-variable   { color: #f8f8f2; }
+.cfm-editor-container .cm-s-monokai span.cm-variable-2 { color: #66d9ef; }
+.cfm-editor-container .cm-s-monokai span.cm-variable-3 { color: #a6e22e; }
+.cfm-editor-container .cm-s-monokai span.cm-def        { color: #fd971f; }
+.cfm-editor-container .cm-s-monokai span.cm-property   { color: #a6e22e; }
+.cfm-editor-container .cm-s-monokai span.cm-builtin    { color: #66d9ef; }
+.cfm-editor-container .cm-s-monokai span.cm-meta       { color: #f92672; }
+.cfm-editor-container .cm-s-monokai span.cm-tag        { color: #f92672; }
+.cfm-editor-container .cm-s-monokai span.cm-attribute  { color: #a6e22e; }
+.cfm-editor-container .cm-s-monokai span.cm-qualifier  { color: #a6e22e; }
+.cfm-editor-container .cm-s-monokai span.cm-bracket    { color: #f8f8f2; }
+.cfm-editor-container .cm-s-monokai span.cm-link       { color: #ae81ff; text-decoration: underline; }
+.cfm-editor-container .cm-s-monokai span.cm-header     { color: #a6e22e; font-weight: bold; }
+.cfm-editor-container .cm-s-monokai span.cm-error      { color: #f8f8f0; background: #f92672; }
+
+/* アクション */
+.cfm-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cfm-status {
+    font-weight: bold;
+}
+.cfm-status.is-ok   { color: #008a20; }
+.cfm-status.is-warn { color: #b26200; }
+
+/* アップロード */
+.cfm-upload-box {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.cfm-upload-status {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #50575e;
+    word-break: break-all;
+    min-height: 16px;
+}
+
+/* 確認モーダル */
+.cfm-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cfm-modal {
+    background: #fff;
+    color: #1d2327;
+    width: 440px;
+    max-width: calc(100% - 40px);
+    padding: 20px 24px;
+    border-radius: 4px;
+    border-top: 5px solid #2271b1;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+.cfm-modal.is-danger {
+    border-top-color: #d63638;
+}
+.cfm-modal h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+.cfm-modal p {
+    margin: 0 0 8px;
+    word-break: break-all;
+}
+.cfm-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+}
+.cfm-modal-ok.is-danger,
+.cfm-modal-ok.is-danger:hover,
+.cfm-modal-ok.is-danger:focus {
+    background: #d63638;
+    border-color: #b32d2e;
+    color: #fff;
+}
+.cfm-modal-ok.is-danger:hover {
+    background: #b32d2e;
+}
